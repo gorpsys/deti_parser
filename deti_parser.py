@@ -85,7 +85,7 @@ def ConvertChildToDict(child: Child) -> dict:
     result['region'] = child.region
     result['healthGroup'] = child.healthGroup
     result['isSibling'] = child.isSibling
-    result['character'] = child.character.replace(',','_')
+    result['character'] = child.character
     result['mother'] = child.mother
     result['father'] = child.father
     result['form'] = child.form
@@ -283,6 +283,15 @@ def merge(d1: dict, d2: dict) -> dict:
         diff += ' link: {}->{}'.format(d1['link'],d2['link'])
         d1['link'] = d2['link']
         flag = True
+
+    index = d1['myNotes'].find(' обновлены данные:')
+
+    if (index>=0):
+        print(d1['myNotes'])
+        print(index)
+        d1['myNotes'] = d1['myNotes'][:index]
+        print(d1['myNotes'])
+        print('=====================')
 
     if flag:
         d1['myNotes'] += ' обновлены данные: '+diff
